@@ -1,0 +1,1 @@
+docker exec -it <your_kafka_container_id_or_name> kafka-topics --create --topic microshop.orders --partitions 10 --replication-factor 1 --zookeeper zookeeper:2181
