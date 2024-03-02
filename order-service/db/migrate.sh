@@ -1,0 +1,1 @@
+goose postgres "user=postgres password=postgres dbname=postgres sslmode=disable port=5432 host=localhost" up
