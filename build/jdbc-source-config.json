@@ -1,0 +1,16 @@
+{
+  "name": "jdbc-source-connector",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "connection.url": "jdbc:postgresql://postgres:5432/postgres",
+    "connection.user": "postgres",
+    "connection.password": "postgres",
+    "topic.prefix": "microshop.",
+    "mode": "incrementing",
+    "incrementing.column.name": "id",
+    "table.whitelist": "outbox",
+    "poll.interval.ms": "5000",
+    "value.converter": "org.apache.kafka.connect.converters.StringConverter",
+    "key.converter": "org.apache.kafka.connect.converters.StringConverter"
+  }
+}
