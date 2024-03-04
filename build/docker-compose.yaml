@@ -40,25 +40,9 @@ services:
       CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
       CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
       CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
-      CONNECT_PLUGIN_PATH: '/usr/share/java,/usr/share/confluent-hub-components'
+      CONNECT_PLUGIN_PATH: '/usr/share/java,/usr/share/confluent-hub-components,/etc/kafka-connect/jars'
       CONNECT_CONFLUENT_TOPIC_BOOTSTRAP_SERVERS: 'kafka:9092'
       CONNECT_CONFLUENT_TOPIC_REPLICATION_FACTOR: 1
-    command: >
-      /bin/bash -c '
-      connector_version="10.7.5"
-      connector_directory="/usr/share/confluent-hub-components/kafka-connect-jdbc-${connector_version}"
-      
-      if [ ! -d "$connector_directory" ]; then
-          wget https://github.com/confluentinc/kafka-connect-jdbc/archive/refs/tags/v10.7.5.tar.gz && 
-          tar -xvf v10.7.5.tar.gz &&
-          mv kafka-connect-jdbc-10.7.5 /usr/share/confluent-hub-components &&
-          echo "Connector downloaded and installed successfully."
-      else
-          echo "Connector directory already exists. Skipping download."
-      fi
-      
-      echo moved... && /etc/confluent/docker/run
-      '
 
   postgres:
     image: postgres:latest
@@ -67,3 +51,19 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
+
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - kafka
+      - kafka-connect
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_METRICS_PORT: 9997
+      KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: first
+      KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: http://kafka-connect:8083
+      DYNAMIC_CONFIG_ENABLED: 'true'

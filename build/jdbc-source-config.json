@@ -10,7 +10,11 @@
     "incrementing.column.name": "id",
     "table.whitelist": "outbox",
     "poll.interval.ms": "5000",
-    "value.converter": "org.apache.kafka.connect.converters.StringConverter",
-    "key.converter": "org.apache.kafka.connect.converters.StringConverter"
+    "value.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "key.converter.schemas.enable": "false",
+    "transforms": "createKey",
+    "transforms.createKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+    "transforms.createKey.fields": "user_id"
   }
 }
