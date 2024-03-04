@@ -20,8 +20,8 @@ func main() {
 		"group.id":                  "background-order-service",
 		"auto.offset.reset":         "latest",
 		"enable.auto.commit":        false,
-		"receive.message.max.bytes": "31457280",
-		"fetch.max.bytes":           "31451280",
+		"receive.message.max.bytes": "1213496160",
+		"fetch.max.bytes":           "1213488160",
 	})
 
 	if err != nil {
