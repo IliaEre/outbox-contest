@@ -1,0 +1,11 @@
+# server
+server:
+  address: "localhost"
+  port: 8080
+
+# database settings
+database:
+  address: "localhos"
+  user: "postgres"
+  pass: "postgres"
+  database: "postgres"

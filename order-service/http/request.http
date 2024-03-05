@@ -1,0 +1,28 @@
+# curl -X POST
+#  http://localhost:8080/api/v1/create-order
+#  -H 'Content-Type: application/json'
+#  -d '{
+#    "name": "John",
+#    "surname": "Doe",
+#    "details": {
+#      "code": 123,
+#      "operation_code": 456,
+#      "transaction_code": "sdfsdfsdfs"
+#    }
+#  }'
+POST http://localhost:8080/api/v1/create-order
+Content-Type: application/json
+USER_UUID: 434baec3-c230-4d20-9907-d532d8483541
+
+{
+  "name": "John",
+  "surname": "Doe",
+  "details": {
+    "code": 123,
+    "operation_code": 456,
+    "transaction_code": "sdfsdfsdfs"
+  }
+}
+
+###
+
